@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li th:text="${sinhVien.fullName}">fullname</li>
+    <li th:text="${sinhVien.age}">age</li>
+    <li th:text="${sinhVien.address}">address</li>
+</ul>
+
+<th:block th:if="${sinhVien.age > 18}"> Thanh nien</th:block>
+
+
+<select name="" id="">
+    <th:block th:each="sinhVien: ${list}">
+        <option th:text="${sinhVien.fullName}"></option>
+    </th:block>
+</select>
+
+<h1>Hien thi table cach 1</h1>
+<table>
+    <thead>
+    <tr>
+        <td>STT</td>
+        <td>Fullname</td>
+        <td>age</td>
+        <td>address</td>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="sinhVien, status : ${list}">
+        <td th:text="${status.index}"></td>
+        <td th:text="${sinhVien.fullName}"></td>
+        <td th:text="${sinhVien.age}"></td>
+        <td th:text="${sinhVien.address}"></td>
+        <td></td>
+    </tr>
+    </tbody>
+</table>
+
+<h1>Hien thi table cach 2</h1>
+
+<table>
+    <thead>
+    <tr>
+        <td>STT</td>
+        <td>Fullname</td>
+        <td>age</td>
+        <td>address</td>
+    </tr>
+    </thead>
+    <tbody>
+    <th:block th:each="sinhVien, status : ${list}">
+        <tr>
+            <td th:text="${status.index}"></td>
+            <td th:text="${sinhVien.fullName}"></td>
+            <td th:text="${sinhVien.age}"></td>
+            <td th:text="${sinhVien.address}"></td>
+            <td></td>
+        </tr>
+    </th:block>
+    </tbody>
+</table>
+</body>
+</html>
