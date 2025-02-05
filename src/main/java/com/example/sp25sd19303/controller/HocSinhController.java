@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class HocSinhController {
@@ -27,6 +28,7 @@ public class HocSinhController {
 
     @PostMapping("/hoc-sinh/add")
     public String add(HocSinh hocSinh) {
+        System.out.println(hocSinh.toString());
         hocSinhRepo.save(hocSinh);
         return "redirect:/hoc-sinh/hien-thi";
     }
@@ -34,6 +36,22 @@ public class HocSinhController {
     @GetMapping("/hoc-sinh/delete/{id}")
     public String delete(@PathVariable("id") Integer id) {
         hocSinhRepo.deleteById(id);
+        return "redirect:/hoc-sinh/hien-thi";
+    }
+
+    @GetMapping("/hoc-sinh/detail/{id}")
+    public String deteail(@PathVariable("id") Integer id, Model model) {
+        HocSinh hocSinh = hocSinhRepo.findById(id).get();
+        System.out.println(hocSinh.toString());
+        model.addAttribute("hocSinh", hocSinh);
+        return "/hoc-sinh/detail.html";
+    }
+
+    @PostMapping("/hoc-sinh/update/{id}")
+    public String update(HocSinh hocSinh) {
+        System.out.println("id can update la :" + hocSinh.getId());
+        System.out.println(hocSinh.toString());
+        hocSinhRepo.save(hocSinh);
         return "redirect:/hoc-sinh/hien-thi";
     }
 }

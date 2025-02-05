@@ -18,7 +18,6 @@
     <input type="radio" name="status" value="Active"> Active
     <input type="radio" name="status" value="Inactive"> InActive <br>
     <button type="submit">Add New</button>
-
 </form>
 
 <table class="table">
@@ -42,7 +41,12 @@
         <!--               th:href="@{|/hoc-sinh/delete/*{hocSinh.id}|}">Delete-->
         <!--            </a>-->
         <!--        </td>-->
-        <td><a class="btn btn-primary" th:href="@{|/hoc-sinh/delete/*{hocSinh.id}|}">Delete</a></td>
+        <td>
+            <a class="btn btn-primary"
+               th:href="@{|/hoc-sinh/delete/*{hocSinh.id}|}">Delete</a>
+            <a class="btn btn-primary"
+               th:href="@{|/hoc-sinh/detail/*{hocSinh.id}|}">Detail</a>
+        </td>
     </tr>
     </tbody>
 </table>
