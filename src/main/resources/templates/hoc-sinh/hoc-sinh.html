@@ -9,14 +9,14 @@
 
 </head>
 <body>
-<form action="/hoc-sinh/add" method="post">
+<form action="/hoc-sinh/add" th:object="${hocSinh}" method="post">
     <lable>Name</lable>
-    <input type="text" name="name"> <br>
+    <input type="text" th:field="*{name}"> <i th:errors="*{name}"></i> <br>
     <lable>Age</lable>
-    <input type="text" name="age"> <br>
+    <input type="text" th:field="*{age}">  <i th:errors="*{age}"></i><br>
     <lable>Status</lable>
-    <input type="radio" name="status" value="Active"> Active
-    <input type="radio" name="status" value="Inactive"> InActive <br>
+    <input type="radio" th:field="*{status}" value="Active"> Active
+    <input type="radio" th:field="*{status}" value="Inactive"> InActive <br>
     <button type="submit">Add New</button>
 </form>
 

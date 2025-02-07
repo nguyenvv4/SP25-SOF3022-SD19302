@@ -2,10 +2,13 @@ package com.example.sp25sd19303.controller;
 
 import com.example.sp25sd19303.model.HocSinh;
 import com.example.sp25sd19303.repository.HocSinhRepo;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -20,17 +23,25 @@ public class HocSinhController {
     HocSinhRepo hocSinhRepo;
 
     @GetMapping("/hoc-sinh/hien-thi")
-    public String home(Model model) {
+    public String home(Model model,
+                       @ModelAttribute("hocSinh") HocSinh hocSinh
+    ) {
         List<HocSinh> list = hocSinhRepo.findAll();
         model.addAttribute("list", list);
         return "/hoc-sinh/hoc-sinh.html";
     }
 
     @PostMapping("/hoc-sinh/add")
-    public String add(HocSinh hocSinh) {
+    public String add(@Valid @ModelAttribute("hocSinh") HocSinh hocSinh,
+                      Errors errors,
+                      Model model) {
         System.out.println(hocSinh.toString());
-        hocSinhRepo.save(hocSinh);
-        return "redirect:/hoc-sinh/hien-thi";
+        if (errors.hasErrors()) {
+            return "/hoc-sinh/hoc-sinh.html";
+        } else {
+            hocSinhRepo.save(hocSinh);
+            return "redirect:/hoc-sinh/hien-thi";
+        }
     }
 
     @GetMapping("/hoc-sinh/delete/{id}")

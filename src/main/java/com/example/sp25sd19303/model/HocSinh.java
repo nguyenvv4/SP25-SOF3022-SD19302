@@ -1,6 +1,8 @@
 package com.example.sp25sd19303.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Table(name = "hoc_sinh")
@@ -13,9 +15,11 @@ public class HocSinh {
     @Column(name = "id")
     private Integer id;
 
+    @NotBlank(message = "Ten khong duoc de trong")
     @Column(name = "name")
     private String name;
 
+    @NotNull(message = "Tuoi khong duoc de trong")
     @Column(name = "age")
     private Integer age;
 
